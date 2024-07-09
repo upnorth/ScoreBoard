@@ -22,8 +22,7 @@ public class ScoreBoard {
         return newMatchId;
     }
 
-    public Match getMatch(int matchId) {
+    Match getMatch(int matchId) {
         return matches.get(matchId);
     }
-
 }

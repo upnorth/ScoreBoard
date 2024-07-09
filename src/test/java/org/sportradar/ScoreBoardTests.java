@@ -17,9 +17,9 @@ class ScoreBoardTests {
 
         var match = scoreBoard.getMatch(matchId);
 
-        assertThat(match.getHomeTeamName()).isEqualTo(TEAM_1_NAME);
-        assertThat(match.getHomeTeamScore()).isEqualTo(0);
-        assertThat(match.getAwayTeamName()).isEqualTo(TEAM_2_NAME);
-        assertThat(match.getAwayTeamScore()).isEqualTo(0);
+        assertThat(match.getHomeTeam().getName()).isEqualTo(TEAM_1_NAME);
+        assertThat(match.getHomeTeam().getScore()).isEqualTo(0);
+        assertThat(match.getAwayTeam().getName()).isEqualTo(TEAM_2_NAME);
+        assertThat(match.getAwayTeam().getScore()).isEqualTo(0);
     }
 }

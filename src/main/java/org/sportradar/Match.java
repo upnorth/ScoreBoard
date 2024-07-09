@@ -1,33 +1,20 @@
 package org.sportradar;
 
-public class Match {
+class Match {
 
-    private final String homeTeam;
-    private int homeTeamScore;
+    private final Team homeTeam;
+    private final Team awayTeam;
 
-    private final String awayTeam;
-    private int awayTeamScore;
-
-    public Match(String homeTeam, String awayTeam) {
-        this.homeTeam = homeTeam;
-        this.homeTeamScore = 0;
-        this.awayTeam = awayTeam;
-        this.awayTeamScore = 0;
+    Match(String homeTeamName, String awayTeamName) {
+        this.homeTeam = new Team(homeTeamName);
+        this.awayTeam = new Team(awayTeamName);
     }
 
-    public int getHomeTeamScore() {
-        return homeTeamScore;
-    }
-
-    public int getAwayTeamScore() {
-        return awayTeamScore;
-    }
-
-    public String getHomeTeamName() {
+    Team getHomeTeam() {
         return homeTeam;
     }
 
-    public String getAwayTeamName() {
+    Team getAwayTeam() {
         return awayTeam;
     }
 }
