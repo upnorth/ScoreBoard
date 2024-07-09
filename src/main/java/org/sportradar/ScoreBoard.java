@@ -3,12 +3,12 @@ package org.sportradar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MatchManager {
+public class ScoreBoard {
 
     private int nextMatchId;
     private final Map<Integer, Match> matches;
 
-    public MatchManager() {
+    public ScoreBoard() {
         nextMatchId = 0;
         matches = new HashMap<>();
     }
