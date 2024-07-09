@@ -4,6 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.sportradar.Match.NO_CHANGES_IN_SCORE_UPDATE;
+import static org.sportradar.Match.SCORE_UPDATE_FOR_BOTH_TEAMS;
+import static org.sportradar.Team.MAX_ONE_GOAL_INCREASE;
+import static org.sportradar.Team.UPDATED_SCORE_LOWER;
 
 class ScoreBoardTests {
 
@@ -44,8 +48,12 @@ class ScoreBoardTests {
         var scoreBoard = new ScoreBoard();
         var matchId = scoreBoard.newMatch(TEAM_1_NAME, TEAM_2_NAME);
 
-        assertThatThrownBy(() -> scoreBoard.updateMatch(matchId, 1, 1))
-                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> scoreBoard.updateMatch(
+                matchId,
+                1,
+                1)
+        ).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(SCORE_UPDATE_FOR_BOTH_TEAMS);
     }
 
     @Test
@@ -58,16 +66,35 @@ class ScoreBoardTests {
                 matchId,
                 match.getHomeTeam().getScore(),
                 match.getAwayTeam().getScore())
-        ).isInstanceOf(IllegalArgumentException.class);
+        ).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(NO_CHANGES_IN_SCORE_UPDATE);
     }
 
     @Test
     void team_can_not_get_lower_score_than_before() {
-        // To be tested
+        var scoreBoard = new ScoreBoard();
+        var matchId = scoreBoard.newMatch(TEAM_1_NAME, TEAM_2_NAME);
+        var match = scoreBoard.getMatch(matchId);
+
+        assertThatThrownBy(() -> scoreBoard.updateMatch(
+                matchId,
+                match.getHomeTeam().getScore() -1,
+                match.getAwayTeam().getScore())
+        ).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(UPDATED_SCORE_LOWER);
     }
 
     @Test
     void team_can_not_score_more_than_one_goal_at_a_time() {
-        // To be tested
+        var scoreBoard = new ScoreBoard();
+        var matchId = scoreBoard.newMatch(TEAM_1_NAME, TEAM_2_NAME);
+        var match = scoreBoard.getMatch(matchId);
+
+        assertThatThrownBy(() -> scoreBoard.updateMatch(
+                matchId,
+                match.getHomeTeam().getScore() +2,
+                match.getAwayTeam().getScore())
+        ).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(MAX_ONE_GOAL_INCREASE);
     }
 }
