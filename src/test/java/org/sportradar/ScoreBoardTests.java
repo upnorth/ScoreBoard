@@ -22,4 +22,19 @@ class ScoreBoardTests {
         assertThat(match.getAwayTeam().getName()).isEqualTo(TEAM_2_NAME);
         assertThat(match.getAwayTeam().getScore()).isEqualTo(0);
     }
+
+    @Test
+    void match_can_be_updated_with_valid_scores() {
+        var scoreBoard = new ScoreBoard();
+
+        var matchId = scoreBoard.newMatch(TEAM_1_NAME, TEAM_2_NAME);
+        scoreBoard.updateMatch(matchId, 1, 0);
+
+        var match = scoreBoard.getMatch(matchId);
+
+        assertThat(match.getHomeTeam().getName()).isEqualTo(TEAM_1_NAME);
+        assertThat(match.getHomeTeam().getScore()).isEqualTo(1);
+        assertThat(match.getAwayTeam().getName()).isEqualTo(TEAM_2_NAME);
+        assertThat(match.getAwayTeam().getScore()).isEqualTo(0);
+    }
 }
