@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.sportradar.Match.NO_CHANGES_IN_SCORE_UPDATE;
 import static org.sportradar.Match.SCORE_UPDATE_FOR_BOTH_TEAMS;
+import static org.sportradar.ScoreBoard.MATCH_DOES_NOT_EXIST;
 import static org.sportradar.ScoreBoard.ONE_MATCH_PER_TEAM;
 import static org.sportradar.Team.*;
 
@@ -143,5 +144,25 @@ class ScoreBoardTests {
         assertThatThrownBy(() -> scoreBoard.newMatch(TEAM_3_NAME, TEAM_2_NAME)
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ONE_MATCH_PER_TEAM);
+    }
+
+    @Test
+    void finishing_existing_match_should_remove_it_from_scoreboard() {
+        var scoreBoard = new ScoreBoard();
+        var matchId = scoreBoard.newMatch(TEAM_1_NAME, TEAM_2_NAME);
+
+        scoreBoard.finishMatch(matchId);
+
+        assertThat(scoreBoard.getMatch(matchId)).isNull();
+    }
+
+    @Test
+    void match_that_does_not_exist_in_scoreboard_can_not_be_removed() {
+        var scoreBoard = new ScoreBoard();
+        var matchId = scoreBoard.newMatch(TEAM_1_NAME, TEAM_2_NAME);
+
+        assertThatThrownBy(() -> scoreBoard.finishMatch(matchId +1)
+        ).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(MATCH_DOES_NOT_EXIST);
     }
 }

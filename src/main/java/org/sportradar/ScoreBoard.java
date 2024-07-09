@@ -6,6 +6,7 @@ import java.util.Map;
 public class ScoreBoard {
 
     static final String ONE_MATCH_PER_TEAM = "One of the teams is already in a match";
+    static final String MATCH_DOES_NOT_EXIST = "Match does not exist";
 
     private int nextMatchId;
     private final Map<Integer, Match> matches;
@@ -45,5 +46,13 @@ public class ScoreBoard {
     public void updateMatch(int matchId, int newHomeTeamScore, int newAwayTeamScore) {
         Match match = matches.get(matchId);
         match.updateScores(newHomeTeamScore, newAwayTeamScore);
+    }
+
+    public void finishMatch(int matchId) {
+        if (!matches.containsKey(matchId)) {
+            throw new IllegalArgumentException(MATCH_DOES_NOT_EXIST);
+        }
+
+        matches.remove(matchId);
     }
 }
