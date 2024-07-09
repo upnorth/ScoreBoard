@@ -7,14 +7,35 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.sportradar.Match.NO_CHANGES_IN_SCORE_UPDATE;
 import static org.sportradar.Match.SCORE_UPDATE_FOR_BOTH_TEAMS;
 import static org.sportradar.ScoreBoard.ONE_MATCH_PER_TEAM;
-import static org.sportradar.Team.MAX_ONE_GOAL_INCREASE;
-import static org.sportradar.Team.UPDATED_SCORE_LOWER;
+import static org.sportradar.Team.*;
 
 class ScoreBoardTests {
 
     public static final String TEAM_1_NAME = "Team 1";
     public static final String TEAM_2_NAME = "Team 2";
     public static final String TEAM_3_NAME = "Team 3";
+
+    @Test
+    void team_must_have_valid_non_null_name() {
+        var scoreBoard = new ScoreBoard();
+
+        // Felt redundant to have 4 distinct test cases for each combination
+        assertThatThrownBy(() -> scoreBoard.newMatch(null, TEAM_1_NAME)
+        ).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(INVALID_TEAM_NAME);
+
+        assertThatThrownBy(() -> scoreBoard.newMatch("", TEAM_1_NAME)
+        ).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(INVALID_TEAM_NAME);
+
+        assertThatThrownBy(() -> scoreBoard.newMatch(TEAM_1_NAME, null)
+        ).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(INVALID_TEAM_NAME);
+
+        assertThatThrownBy(() -> scoreBoard.newMatch(TEAM_1_NAME, "")
+        ).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(INVALID_TEAM_NAME);
+    }
 
     @Test
     void new_match_has_correct_initial_scores() {
