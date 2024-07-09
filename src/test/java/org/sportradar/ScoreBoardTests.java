@@ -37,4 +37,19 @@ class ScoreBoardTests {
         assertThat(match.getAwayTeam().getName()).isEqualTo(TEAM_2_NAME);
         assertThat(match.getAwayTeam().getScore()).isEqualTo(0);
     }
+
+    @Test
+    void match_can_not_be_updated_with_the_current_scores() {
+        // To be tested
+    }
+
+    @Test
+    void team_can_not_get_lower_score_than_before() {
+        // To be tested
+    }
+
+    @Test
+    void team_can_not_score_more_than_one_goal_at_a_time() {
+        // To be tested
+    }
 }

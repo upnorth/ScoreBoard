@@ -25,4 +25,9 @@ public class ScoreBoard {
     Match getMatch(int matchId) {
         return matches.get(matchId);
     }
+
+    public void updateMatch(int matchId, int newHomeTeamScore, int newAwayTeamScore) {
+        Match match = matches.get(matchId);
+        match.updateScores(newHomeTeamScore, newAwayTeamScore);
+    }
 }
