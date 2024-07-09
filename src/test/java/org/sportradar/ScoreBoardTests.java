@@ -50,7 +50,15 @@ class ScoreBoardTests {
 
     @Test
     void match_can_not_be_updated_with_the_current_scores() {
-        // To be tested
+        var scoreBoard = new ScoreBoard();
+        var matchId = scoreBoard.newMatch(TEAM_1_NAME, TEAM_2_NAME);
+        var match = scoreBoard.getMatch(matchId);
+
+        assertThatThrownBy(() -> scoreBoard.updateMatch(
+                matchId,
+                match.getHomeTeam().getScore(),
+                match.getAwayTeam().getScore())
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
