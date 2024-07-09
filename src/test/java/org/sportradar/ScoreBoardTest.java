@@ -10,7 +10,7 @@ import static org.sportradar.ScoreBoard.MATCH_DOES_NOT_EXIST;
 import static org.sportradar.ScoreBoard.ONE_MATCH_PER_TEAM;
 import static org.sportradar.Team.*;
 
-class ScoreBoardTests {
+class ScoreBoardTest {
 
     public static final String TEAM_1_NAME = "Team 1";
     public static final String TEAM_2_NAME = "Team 2";
