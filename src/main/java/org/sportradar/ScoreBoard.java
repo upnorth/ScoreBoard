@@ -2,6 +2,7 @@ package org.sportradar;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 public class ScoreBoard {
 
@@ -33,10 +34,11 @@ public class ScoreBoard {
         // This check feels pretty heavy and there are probably better ways to implement it.
         // Although new matches doesn't start too often, so it might be ok depending on total # of matches in the scoreboard.
         return matches.values().stream()
-                .anyMatch(match -> match.getHomeTeam().getName().equals(homeTeam)
-                        || match.getAwayTeam().getName().equals(awayTeam)
-                        || match.getHomeTeam().getName().equals(awayTeam)
-                        || match.getAwayTeam().getName().equals(homeTeam));
+                .flatMap(match -> Stream.of(
+                        match.getHomeTeam().getName(),
+                        match.getAwayTeam().getName())
+                )
+                .anyMatch(teamName -> teamName.equals(homeTeam) || teamName.equals(awayTeam));
     }
 
     Match getMatch(int matchId) {
