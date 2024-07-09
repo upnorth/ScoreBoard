@@ -3,6 +3,7 @@ package org.sportradar;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ScoreBoardTests {
 
@@ -36,6 +37,15 @@ class ScoreBoardTests {
         assertThat(match.getHomeTeam().getScore()).isEqualTo(1);
         assertThat(match.getAwayTeam().getName()).isEqualTo(TEAM_2_NAME);
         assertThat(match.getAwayTeam().getScore()).isEqualTo(0);
+    }
+
+    @Test
+    void match_can_not_be_updated_with_new_scores_for_both_teams_at_the_same_time() {
+        var scoreBoard = new ScoreBoard();
+        var matchId = scoreBoard.newMatch(TEAM_1_NAME, TEAM_2_NAME);
+
+        assertThatThrownBy(() -> scoreBoard.updateMatch(matchId, 1, 1))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

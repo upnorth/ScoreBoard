@@ -23,6 +23,10 @@ class Match {
             throw new IllegalArgumentException("Updated scores are identical to current scores");
         }
 
+        if (newHomeTeamScore != homeTeam.getScore() && newAwayTeamScore != awayTeam.getScore()) {
+            throw new IllegalArgumentException("Both teams can't score at the same time");
+        }
+
         this.homeTeam.updateScore(newHomeTeamScore);
         this.awayTeam.updateScore(newAwayTeamScore);
     }
