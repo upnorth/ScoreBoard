@@ -19,22 +19,22 @@ public class Team {
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public int getScore() {
-        return this.score;
+        return score;
     }
 
     public void updateScore(int newScore) {
-        if (newScore < this.score) {
+        if (newScore < score) {
             throw new IllegalArgumentException(UPDATED_SCORE_LOWER);
         }
 
-        if (newScore - this.score > 1) {
+        if (newScore - score > 1) {
             throw new IllegalArgumentException(MAX_ONE_GOAL_INCREASE);
         }
 
-        this.score = newScore;
+        score = newScore;
     }
 }

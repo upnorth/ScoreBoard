@@ -9,8 +9,8 @@ class Match {
     private final Team awayTeam;
 
     Match(String homeTeamName, String awayTeamName) {
-        this.homeTeam = new Team(homeTeamName);
-        this.awayTeam = new Team(awayTeamName);
+        homeTeam = new Team(homeTeamName);
+        awayTeam = new Team(awayTeamName);
     }
 
     Team getHomeTeam() {
@@ -30,7 +30,7 @@ class Match {
             throw new IllegalArgumentException(SCORE_UPDATE_FOR_BOTH_TEAMS);
         }
 
-        this.homeTeam.updateScore(newHomeTeamScore);
-        this.awayTeam.updateScore(newAwayTeamScore);
+        homeTeam.updateScore(newHomeTeamScore);
+        awayTeam.updateScore(newAwayTeamScore);
     }
 }
