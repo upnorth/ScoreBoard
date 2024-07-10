@@ -109,6 +109,8 @@ but formatting it with Markdown felt appropriate since it's a de facto industry 
 
 ### Approach
 
+#### Day 1 (~6h)
+
 The approach for implementation was to read through all instructions before getting started.
 It's hard to pick up on all the details on the first read-through, but it should be done at least once.
 
@@ -122,9 +124,13 @@ The solution has been implemented an operation at a time with continuous refacto
 The first versions of operations 1-3 including tests were implemented day 1 in about 6 hours.
 The first version of the README was added as well.
 
+#### Day 2 (~3h)
+
 Second day I spent a couple of hours on the summary.
 The first version having working sorting with a corresponding minimal test with both same and different total scores.
 In the second iteration I changed from Map to List as data-structure for the current matches to simplify sorting syntax.
 
 Later re-read the task description a second time after all the main features were implemented.
-Noticed the expectation of documented assumptions and added those to the README.
+I noticed the expectation of documented assumptions and added those to the README.
+I also realized that the summary data structure wasn't really designed for consumption and added the MatchSummary record
+to provide a more concise, flat and more relevant model.
