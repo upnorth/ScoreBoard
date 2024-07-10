@@ -16,13 +16,18 @@ It can also be run through the test suite inside intellij.
 
 ### Start a new Score Board
 
-An empty scoreboard is initialized simply by instantiating the ScoreBoard.java class.
-
+```
 new ScoreBoard();
+```
+
+An empty scoreboard is initialized simply by instantiating the ScoreBoard.java class.
+This creates an empty scoreboard that you can start adding new matches to.
 
 ### Operation 1: Add new match
 
-int matchId = scoreBoard.newMatch("Team one", "Team two");
+```
+int matchId = scoreBoard.newMatch("Home team name", "Away team name");
+```
 
 With that instance new matches can be added by providing the team names, home and away respectively.
 The code checks that valid names are provided, null or empty strings are not permitted.
@@ -32,21 +37,30 @@ The code checks that the team names in a new match doesn't already exist in any 
 
 ### Operation 2: Update scores of active matches
 
-scoreBoard.updateMatch(matchId, 1, 0);
+```
+scoreBoard.updateMatch(matchId, updatedHomeTeamScore, updatedAwayTeamScore);
+```
 
 Current match scores can be updated by simply providing the matchId and the new scores for the home and away team respectively.
 One team at a time can get one more goal, all other changes are checked and blocked including updates to identical scores as it's a redundant update.
 
 ### Operation 3: Remove finished matches
 
+```
 scoreBoard.finishMatch(matchId);
+```
 
 Any existing match can easily be removed with its unique match id as above.
 Removing a match id that doesn't exist will cause an error.
 
 ###  Operation 4: Get scoreboard summary
 
-TBD
+```
+scoreBoard.getSummary();
+```
+
+getSummary() simply returns a list of Match objects sorted with bigger total score first, or in case of identical totals, earlier added first.
+The data in this list can then be iterated over and used by the library user.
 
 ## Developer notes
 
