@@ -192,19 +192,19 @@ class ScoreBoardTest {
         var second1total = scoreBoard.getMatch(match2Id);
         var third3total = scoreBoard.getMatch(match3Id);
 
-        assertThat(summary.getFirst().getHomeTeam().getName()).isEqualTo(third3total.getHomeTeam().getName());
-        assertThat(summary.getFirst().getHomeTeam().getScore()).isEqualTo(third3total.getHomeTeam().getScore());
-        assertThat(summary.getFirst().getAwayTeam().getName()).isEqualTo(third3total.getAwayTeam().getName());
-        assertThat(summary.getFirst().getAwayTeam().getScore()).isEqualTo(third3total.getAwayTeam().getScore());
+        assertThat(summary.getFirst().homeTeamName()).isEqualTo(third3total.getHomeTeam().getName());
+        assertThat(summary.getFirst().homeTeamScore()).isEqualTo(third3total.getHomeTeam().getScore());
+        assertThat(summary.getFirst().awayTeamName()).isEqualTo(third3total.getAwayTeam().getName());
+        assertThat(summary.getFirst().awayTeamScore()).isEqualTo(third3total.getAwayTeam().getScore());
 
-        assertThat(summary.get(1).getHomeTeam().getName()).isEqualTo(first1total.getHomeTeam().getName());
-        assertThat(summary.get(1).getHomeTeam().getScore()).isEqualTo(first1total.getHomeTeam().getScore());
-        assertThat(summary.get(1).getAwayTeam().getName()).isEqualTo(first1total.getAwayTeam().getName());
-        assertThat(summary.get(1).getAwayTeam().getScore()).isEqualTo(first1total.getAwayTeam().getScore());
+        assertThat(summary.get(1).homeTeamName()).isEqualTo(first1total.getHomeTeam().getName());
+        assertThat(summary.get(1).homeTeamScore()).isEqualTo(first1total.getHomeTeam().getScore());
+        assertThat(summary.get(1).awayTeamName()).isEqualTo(first1total.getAwayTeam().getName());
+        assertThat(summary.get(1).awayTeamScore()).isEqualTo(first1total.getAwayTeam().getScore());
 
-        assertThat(summary.get(2).getHomeTeam().getName()).isEqualTo(second1total.getHomeTeam().getName());
-        assertThat(summary.get(2).getHomeTeam().getScore()).isEqualTo(second1total.getHomeTeam().getScore());
-        assertThat(summary.get(2).getAwayTeam().getName()).isEqualTo(second1total.getAwayTeam().getName());
-        assertThat(summary.get(2).getAwayTeam().getScore()).isEqualTo(second1total.getAwayTeam().getScore());
+        assertThat(summary.get(2).homeTeamName()).isEqualTo(second1total.getHomeTeam().getName());
+        assertThat(summary.get(2).homeTeamScore()).isEqualTo(second1total.getHomeTeam().getScore());
+        assertThat(summary.get(2).awayTeamName()).isEqualTo(second1total.getAwayTeam().getName());
+        assertThat(summary.get(2).awayTeamScore()).isEqualTo(second1total.getAwayTeam().getScore());
     }
 }

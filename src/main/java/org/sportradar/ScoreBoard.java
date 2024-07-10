@@ -60,10 +60,15 @@ public class ScoreBoard {
         matches.remove(matchId);
     }
 
-    public List<Match> getSummary() {
+    public List<MatchSummary> getSummary() {
         return matches.stream()
                 .sorted(Comparator.comparingInt(Match::getTotalScore).reversed()
                         .thenComparing(Match::getId))
+                .map(match -> new MatchSummary(
+                        match.getHomeTeam().getName(),
+                        match.getHomeTeam().getScore(),
+                        match.getAwayTeam().getName(),
+                        match.getAwayTeam().getScore()))
                 .toList();
     }
 }
