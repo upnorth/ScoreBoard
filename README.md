@@ -64,6 +64,26 @@ The data in this list can then be iterated over and used by the library user.
 
 ## Developer notes
 
+### Assumptions
+
+#### Explicit match id
+
+In order to create an easy way to sort the matches on when they were added to the score board I decided to add the internal match id.
+It would likely be possible to implement an index based solution where that explicit field isn't required,
+but having the id field does enable intuitive business logic implementation and also a more free choice of how to store and manage the data. 
+The requirements state that a finished match should be removed from the summary, but that could be controlled with a boolean flag as well.
+That would also enable keeping track of historical matches, which would probably be a nice feature to add.
+
+#### Summary returned as List of Match objects
+
+Since the requirements state that the solution is supposed to be a simple library but the summary is a bit ambiguously presented in the task,
+I decided that the most likely expectations is to simply return a List of Java objects.
+I.e. it's not entirely clear in what format the summary should be delivered, only which sort order.
+This allows for the library to both be copied into an existing Java project (with possible modifications depending on Java-language compatibility) and used directly,
+or be used in a REST API where there is typically a Java to JSON serialization in place.
+
+### Approach
+
 The approach for implementation was to read through all instructions before getting started.
 It's hard to pick up on all the details on the first read-through, but it should be done at least once.
 
@@ -80,3 +100,6 @@ The first version of the README was added as well.
 Second day I spent a couple of hours on the summary.
 The first version having working sorting with a corresponding minimal test with both same and different total scores.
 In the second iteration I changed from Map to List as data-structure for the current matches to simplify sorting syntax.
+
+Later re-read the task description a second time after all the main features were implemented.
+Noticed the expectation of documented assumptions and added those to the README.
