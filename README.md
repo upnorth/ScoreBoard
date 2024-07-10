@@ -83,6 +83,15 @@ The requirements state that a finished match should be removed from the summary,
 boolean flag as well.
 That would also enable keeping track of historical matches, which would probably be a nice feature to add.
 
+#### Teams must have valid names
+
+Mostly driven by a realization that null-checks seemed like they should be redundant,
+but also seemed like a reasonable business requirement to have.
+Valid in the loosest sense possible, not being null or an empty string.
+This does allow for the library to be used for almost anything, where team names can't be known in advance.
+But for more official use-cases they could also be pre-set enums of known teams around the world,
+which lowers the risk of misspelling free-text strings and similar issues.
+
 #### Summary returned as List of MatchSummary objects
 
 Since the requirements state that the solution is supposed to be a simple library but the summary is a bit ambiguously
