@@ -17,7 +17,7 @@ class MatchTest {
         var match = new Match(1, TEAM_1_NAME, TEAM_2_NAME);
 
         match.updateScores(
-                match.getHomeTeam().getScore() +1,
+                match.getHomeTeam().getScore() + 1,
                 match.getAwayTeam().getScore()
         );
 
@@ -31,7 +31,7 @@ class MatchTest {
 
         match.updateScores(
                 match.getHomeTeam().getScore(),
-                match.getAwayTeam().getScore() +1);
+                match.getAwayTeam().getScore() + 1);
 
         assertThat(match.getHomeTeam().getScore()).isEqualTo(0);
         assertThat(match.getAwayTeam().getScore()).isEqualTo(1);
@@ -42,8 +42,8 @@ class MatchTest {
         var match = new Match(1, TEAM_1_NAME, TEAM_2_NAME);
 
         assertThatThrownBy(() -> match.updateScores(
-                match.getHomeTeam().getScore() +1,
-                match.getAwayTeam().getScore() +1))
+                match.getHomeTeam().getScore() + 1,
+                match.getAwayTeam().getScore() + 1))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(SCORE_UPDATE_FOR_BOTH_TEAMS);
     }

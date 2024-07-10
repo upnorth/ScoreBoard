@@ -105,7 +105,7 @@ class ScoreBoardTest {
 
         assertThatThrownBy(() -> scoreBoard.updateMatch(
                 matchId,
-                match.getHomeTeam().getScore() -1,
+                match.getHomeTeam().getScore() - 1,
                 match.getAwayTeam().getScore())
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(UPDATED_SCORE_LOWER);
@@ -119,7 +119,7 @@ class ScoreBoardTest {
 
         assertThatThrownBy(() -> scoreBoard.updateMatch(
                 matchId,
-                match.getHomeTeam().getScore() +2,
+                match.getHomeTeam().getScore() + 2,
                 match.getAwayTeam().getScore())
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(MAX_ONE_GOAL_INCREASE);
@@ -164,7 +164,7 @@ class ScoreBoardTest {
         var scoreBoard = new ScoreBoard();
         var matchId = scoreBoard.newMatch(TEAM_1_NAME, TEAM_2_NAME);
 
-        assertThatThrownBy(() -> scoreBoard.finishMatch(matchId +1)
+        assertThatThrownBy(() -> scoreBoard.finishMatch(matchId + 1)
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(MATCH_DOES_NOT_EXIST);
     }

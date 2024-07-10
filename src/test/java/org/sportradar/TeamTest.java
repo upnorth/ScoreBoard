@@ -32,7 +32,7 @@ class TeamTest {
     void team_can_get_a_new_goal() {
         var team = new Team("Team 1");
 
-        team.updateScore(team.getScore() +1);
+        team.updateScore(team.getScore() + 1);
 
         assertThat(team.getScore()).isEqualTo(1);
     }
@@ -41,7 +41,7 @@ class TeamTest {
     void team_can_not_get_lower_score_than_before() {
         var team = new Team("Team 1");
 
-        assertThatThrownBy(() -> team.updateScore(team.getScore() -1)
+        assertThatThrownBy(() -> team.updateScore(team.getScore() - 1)
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(UPDATED_SCORE_LOWER);
     }
@@ -50,7 +50,7 @@ class TeamTest {
     void team_can_not_score_more_than_one_goal_at_a_time() {
         var team = new Team("Team 1");
 
-        assertThatThrownBy(() -> team.updateScore(team.getScore() +2)
+        assertThatThrownBy(() -> team.updateScore(team.getScore() + 2)
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(MAX_ONE_GOAL_INCREASE);
     }
