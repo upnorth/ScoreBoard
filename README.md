@@ -72,6 +72,11 @@ The data in this list can then be iterated over and used by the library user.
 
 ### Assumptions
 
+#### To be used in fairly modern projects
+
+Selected Java 22 to enable some nice syntax, but that can of course limit use of the library especially in bigger
+systems that usually doesn't get language upgrades unless they are critical.
+
 #### Explicit match id
 
 In order to create an easy way to sort the matches on when they were added to the score board I decided to add the
