@@ -101,6 +101,12 @@ based on the same or simply RuntimeException.
 Then the tests could focus more on types rather than the specific messages.
 An alternative could be to create enum error codes and document those.
 
+#### README.md with Markdown formatting
+
+Seems fairly straight forward but might be worth mentioning.
+The requirements only state that the file should be included and provide good documentation,
+but formatting it with Markdown felt appropriate since it's a de facto industry standard.
+
 ### Approach
 
 The approach for implementation was to read through all instructions before getting started.
