@@ -2,7 +2,7 @@
 
 ## Code structure
 
-The library is implemented as a standard Java 22/Maven project with JUnit 5 and AssertJ for testing.
+The library is implemented as a standard Java 21/Maven project with JUnit 5 and AssertJ for testing.
 
 The code is organized in the ScoreBoard, Match and Team Java-classes that simply represent the relevant entities of the
 use-case and its business logic.
@@ -74,8 +74,13 @@ The data in this list can then be iterated over and used by the library user.
 
 #### To be used in fairly modern projects
 
-Selected Java 22 to enable some nice syntax, but that can of course limit use of the library especially in bigger
+Selected Java 21 to enable some nice syntax, but that can of course limit use of the library especially in bigger
 systems that usually doesn't get language upgrades unless they are critical.
+
+Initially intellij had suggested version 22 but since that's very new and 21 is at least the latest LTS I downgraded to
+that (pom.xml and project settings).
+Everything worked as before so the code wasn't using any Java 22 features, which isn't surprising since I only have a
+few months experience with 21 so far.
 
 #### Explicit match id
 
