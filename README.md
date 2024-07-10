@@ -121,6 +121,14 @@ Seems fairly straight forward but might be worth mentioning.
 The requirements only state that the file should be included and provide good documentation,
 but formatting it with Markdown felt appropriate since it's a de facto industry standard.
 
+#### More verbose commits than usual
+
+As per the instructions I've tried to document my changes extensively with Git.
+Normally most of this would be present in a PR/MR description or code-comments instead.
+I went out of my way to clarify my intentions directly in Git here.
+My commit messages are usually fairly concise and I like to squash them all into a feature commit as the PR/MR is
+merged, but until then I figure that they might provide some value for me or the reviewer.
+
 ### Approach
 
 #### Day 1 (~6h)
