@@ -62,3 +62,7 @@ Sometimes getting into a flow causes you to run off-road for a bit, so to speak.
 The solution has been implemented an operation at a time with continuous refactoring of the code as it grew.
 The first versions of operations 1-3 including tests were implemented day 1 in about 6 hours.
 The first version of the README was added as well.
+
+Second day I spent a couple of hours on the summary.
+The first version having working sorting with a corresponding minimal test with both same and different total scores.
+In the second iteration I changed from Map to List as data-structure for the current matches to simplify sorting syntax.
