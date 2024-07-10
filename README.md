@@ -4,13 +4,15 @@
 
 The library is implemented as a standard Java 22/Maven project with JUnit 5 and AssertJ for testing.
 
-The code is organized in the ScoreBoard, Match and Team Java-classes that simply represent the relevant entities of the use-case and its business logic.
+The code is organized in the ScoreBoard, Match and Team Java-classes that simply represent the relevant entities of the
+use-case and its business logic.
 
 ## Usage
 
 ### Running the code
 
-As per the instructions there is no standalone runnable implementation in terms of building and running the project in the terminal or as a web REST API.
+As per the instructions there is no standalone runnable implementation in terms of building and running the project in
+the terminal or as a web REST API.
 It's simply a library class accessible via regular constructors and methods.
 It can also be run through the test suite inside intellij.
 
@@ -33,7 +35,8 @@ With that instance new matches can be added by providing the team names, home an
 The code checks that valid names are provided, null or empty strings are not permitted.
 Those teams both get 0 as starting scores.
 Successfully adding a new match returns its unique id for future reference.
-The code checks that the team names in a new match doesn't already exist in any match currently in the Score Board as the same team naturally can't play multiple concurrent matches.
+The code checks that the team names in a new match doesn't already exist in any match currently in the Score Board as
+the same team naturally can't play multiple concurrent matches.
 
 ### Operation 2: Update scores of active matches
 
@@ -41,8 +44,10 @@ The code checks that the team names in a new match doesn't already exist in any 
 scoreBoard.updateMatch(matchId, updatedHomeTeamScore, updatedAwayTeamScore);
 ```
 
-Current match scores can be updated by simply providing the matchId and the new scores for the home and away team respectively.
-One team at a time can get one more goal, all other changes are checked and blocked including updates to identical scores as it's a redundant update.
+Current match scores can be updated by simply providing the matchId and the new scores for the home and away team
+respectively.
+One team at a time can get one more goal, all other changes are checked and blocked including updates to identical
+scores as it's a redundant update.
 
 ### Operation 3: Remove finished matches
 
@@ -53,13 +58,14 @@ scoreBoard.finishMatch(matchId);
 Any existing match can easily be removed with its unique match id as above.
 Removing a match id that doesn't exist will cause an error.
 
-###  Operation 4: Get scoreboard summary
+### Operation 4: Get scoreboard summary
 
 ```
 scoreBoard.getSummary();
 ```
 
-getSummary() simply returns a list of Match objects sorted with bigger total score first, or in case of identical totals, earlier added first.
+getSummary() simply returns a list of Match objects sorted with bigger total score first, or in case of identical
+totals, earlier added first.
 The data in this list can then be iterated over and used by the library user.
 
 ## Developer notes
@@ -68,18 +74,23 @@ The data in this list can then be iterated over and used by the library user.
 
 #### Explicit match id
 
-In order to create an easy way to sort the matches on when they were added to the score board I decided to add the internal match id.
+In order to create an easy way to sort the matches on when they were added to the score board I decided to add the
+internal match id.
 It would likely be possible to implement an index based solution where that explicit field isn't required,
-but having the id field does enable intuitive business logic implementation and also a more free choice of how to store and manage the data. 
-The requirements state that a finished match should be removed from the summary, but that could be controlled with a boolean flag as well.
+but having the id field does enable intuitive business logic implementation and also a more free choice of how to store
+and manage the data.
+The requirements state that a finished match should be removed from the summary, but that could be controlled with a
+boolean flag as well.
 That would also enable keeping track of historical matches, which would probably be a nice feature to add.
 
 #### Summary returned as List of MatchSummary objects
 
-Since the requirements state that the solution is supposed to be a simple library but the summary is a bit ambiguously presented in the task,
+Since the requirements state that the solution is supposed to be a simple library but the summary is a bit ambiguously
+presented in the task,
 I decided that the most likely expectations is to simply return a List of Java objects.
 I.e. it's not entirely clear in what format the summary should be delivered, only which sort order.
-This allows for the library to both be copied into an existing Java project (with possible modifications depending on Java-language compatibility) and used directly,
+This allows for the library to both be copied into an existing Java project (with possible modifications depending on
+Java-language compatibility) and used directly,
 or be used in a REST API where there is typically a Java to JSON serialization in place.
 
 #### Placeholder exceptions
