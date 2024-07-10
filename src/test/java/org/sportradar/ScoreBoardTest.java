@@ -15,6 +15,9 @@ class ScoreBoardTest {
     public static final String TEAM_1_NAME = "Team 1";
     public static final String TEAM_2_NAME = "Team 2";
     public static final String TEAM_3_NAME = "Team 3";
+    public static final String TEAM_4_NAME = "Team 4";
+    public static final String TEAM_5_NAME = "Team 5";
+    public static final String TEAM_6_NAME = "Team 6";
 
     @Test
     void team_must_have_valid_non_null_name() {
@@ -164,5 +167,44 @@ class ScoreBoardTest {
         assertThatThrownBy(() -> scoreBoard.finishMatch(matchId +1)
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(MATCH_DOES_NOT_EXIST);
+    }
+
+    @Test
+    void current_matches_summary_should_have_correct_scores_and_order() {
+        // Create scoreboard and add matches
+        var scoreBoard = new ScoreBoard();
+        var match1Id = scoreBoard.newMatch(TEAM_1_NAME, TEAM_2_NAME);
+        var match2Id = scoreBoard.newMatch(TEAM_3_NAME, TEAM_4_NAME);
+        var match3Id = scoreBoard.newMatch(TEAM_5_NAME, TEAM_6_NAME);
+
+        // Update match scores
+        scoreBoard.updateMatch(match1Id, 1, 0);
+
+        scoreBoard.updateMatch(match2Id, 0, 1);
+
+        scoreBoard.updateMatch(match3Id, 0, 1);
+        scoreBoard.updateMatch(match3Id, 0, 2);
+        scoreBoard.updateMatch(match3Id, 1, 2);
+
+        // Verify that summary is ordered by bigger total score first, and lower match id second
+        var first1total = scoreBoard.getMatch(match1Id);
+        var second1total = scoreBoard.getMatch(match2Id);
+        var third3total = scoreBoard.getMatch(match3Id);
+        var summary = scoreBoard.getSummary();
+
+        assertThat(summary.getFirst().getHomeTeam().getName()).isEqualTo(third3total.getHomeTeam().getName());
+        assertThat(summary.getFirst().getHomeTeam().getScore()).isEqualTo(third3total.getHomeTeam().getScore());
+        assertThat(summary.getFirst().getAwayTeam().getName()).isEqualTo(third3total.getAwayTeam().getName());
+        assertThat(summary.getFirst().getAwayTeam().getScore()).isEqualTo(third3total.getAwayTeam().getScore());
+
+        assertThat(summary.get(1).getHomeTeam().getName()).isEqualTo(first1total.getHomeTeam().getName());
+        assertThat(summary.get(1).getHomeTeam().getScore()).isEqualTo(first1total.getHomeTeam().getScore());
+        assertThat(summary.get(1).getAwayTeam().getName()).isEqualTo(first1total.getAwayTeam().getName());
+        assertThat(summary.get(1).getAwayTeam().getScore()).isEqualTo(first1total.getAwayTeam().getScore());
+
+        assertThat(summary.get(2).getHomeTeam().getName()).isEqualTo(second1total.getHomeTeam().getName());
+        assertThat(summary.get(2).getHomeTeam().getScore()).isEqualTo(second1total.getHomeTeam().getScore());
+        assertThat(summary.get(2).getAwayTeam().getName()).isEqualTo(second1total.getAwayTeam().getName());
+        assertThat(summary.get(2).getAwayTeam().getScore()).isEqualTo(second1total.getAwayTeam().getScore());
     }
 }

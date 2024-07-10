@@ -1,6 +1,6 @@
 package org.sportradar;
 
-class Match {
+public class Match {
 
     static final String NO_CHANGES_IN_SCORE_UPDATE = "Updated scores are identical to current scores";
     static final String SCORE_UPDATE_FOR_BOTH_TEAMS = "Both teams can't score at the same time";
@@ -32,5 +32,9 @@ class Match {
 
         homeTeam.updateScore(newHomeTeamScore);
         awayTeam.updateScore(newAwayTeamScore);
+    }
+
+    public int getTotalScore() {
+        return homeTeam.getScore() + awayTeam.getScore();
     }
 }

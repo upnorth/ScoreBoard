@@ -1,6 +1,8 @@
 package org.sportradar;
 
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -56,5 +58,14 @@ public class ScoreBoard {
         }
 
         matches.remove(matchId);
+    }
+
+    public List<Match> getSummary() {
+        return matches.entrySet().stream()
+                .sorted(Comparator.comparingInt((Map.Entry<Integer, Match> entry) -> entry.getValue().getTotalScore())
+                        .reversed()
+                        .thenComparing(Map.Entry::getKey))
+                .map(Map.Entry::getValue)
+                .toList();
     }
 }
