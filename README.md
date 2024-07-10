@@ -134,6 +134,19 @@ I went out of my way to clarify my intentions directly in Git here.
 My commit messages are usually fairly concise and I like to squash them all into a feature commit as the PR/MR is
 merged, but until then I figure that they might provide some value for me or the reviewer.
 
+#### Regarding production ready code and scalability
+
+The recruiter presenting this task helpfully pointed out that considering things like thread safety is appreciated,
+and certainly seems relevant in the systems Sportradar develops and maintains.
+
+However, the task is also clear that it's supposed to be a simple library, so I'm hesitant to add complexities like
+that, especially without clearer technical requirements for it.
+I did however read about it a bit and besides already using final for immutability, I would consider switching to a
+"CopyOnWriteArrayList" or similar for better thread safety as well as using an Atomic integer for the match counter.
+Both from suggestions by ChatGPT that seemed relevant for this use-case.
+
+My implementation is focused on a simple implementation to "my standards", as also instructed.
+
 ### Approach
 
 #### Day 1 (~6h)
