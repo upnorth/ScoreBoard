@@ -57,7 +57,12 @@ public class ScoreBoard {
             throw new IllegalArgumentException(MATCH_DOES_NOT_EXIST);
         }
 
-        matches.remove(matchId);
+        Match matchToRemove = matches.stream()
+                .filter(match -> match.getId() == matchId)
+                .findFirst()
+                .orElseThrow();
+
+        matches.remove(matchToRemove);
     }
 
     public List<MatchSummary> getSummary() {
