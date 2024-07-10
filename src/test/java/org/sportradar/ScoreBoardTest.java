@@ -187,10 +187,10 @@ class ScoreBoardTest {
         scoreBoard.updateMatch(match3Id, 1, 2);
 
         // Verify that summary is ordered by bigger total score first, and lower match id second
+        var summary = scoreBoard.getSummary();
         var first1total = scoreBoard.getMatch(match1Id);
         var second1total = scoreBoard.getMatch(match2Id);
         var third3total = scoreBoard.getMatch(match3Id);
-        var summary = scoreBoard.getSummary();
 
         assertThat(summary.getFirst().getHomeTeam().getName()).isEqualTo(third3total.getHomeTeam().getName());
         assertThat(summary.getFirst().getHomeTeam().getScore()).isEqualTo(third3total.getHomeTeam().getScore());

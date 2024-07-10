@@ -14,7 +14,7 @@ class MatchTest {
 
     @Test
     void match_can_be_updated_with_one_more_goal_for_home_team() {
-        var match = new Match(TEAM_1_NAME, TEAM_2_NAME);
+        var match = new Match(1, TEAM_1_NAME, TEAM_2_NAME);
 
         match.updateScores(
                 match.getHomeTeam().getScore() +1,
@@ -27,7 +27,7 @@ class MatchTest {
 
     @Test
     void match_can_be_updated_with_one_more_goal_for_away_team() {
-        var match = new Match(TEAM_1_NAME, TEAM_2_NAME);
+        var match = new Match(1, TEAM_1_NAME, TEAM_2_NAME);
 
         match.updateScores(
                 match.getHomeTeam().getScore(),
@@ -39,7 +39,7 @@ class MatchTest {
 
     @Test
     void match_can_not_be_updated_with_new_scores_for_both_teams_at_the_same_time() {
-        var match = new Match(TEAM_1_NAME, TEAM_2_NAME);
+        var match = new Match(1, TEAM_1_NAME, TEAM_2_NAME);
 
         assertThatThrownBy(() -> match.updateScores(
                 match.getHomeTeam().getScore() +1,
@@ -50,7 +50,7 @@ class MatchTest {
 
     @Test
     void match_can_not_be_updated_with_the_current_scores() {
-        var match = new Match(TEAM_1_NAME, TEAM_2_NAME);
+        var match = new Match(1, TEAM_1_NAME, TEAM_2_NAME);
 
         assertThatThrownBy(() -> match.updateScores(
                 match.getHomeTeam().getScore(),

@@ -1,9 +1,6 @@
 package org.sportradar;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class ScoreBoard {
@@ -12,11 +9,11 @@ public class ScoreBoard {
     static final String MATCH_DOES_NOT_EXIST = "Match does not exist";
 
     private int nextMatchId;
-    private final Map<Integer, Match> matches;
+    private final List<Match> matches;
 
     public ScoreBoard() {
         nextMatchId = 0;
-        matches = new HashMap<>();
+        matches = new ArrayList<>();
     }
 
     public int newMatch(String homeTeam, String awayTeam) {
@@ -27,7 +24,7 @@ public class ScoreBoard {
         var newMatchId = nextMatchId;
         nextMatchId++;
 
-        matches.put(newMatchId, new Match(homeTeam, awayTeam));
+        matches.add(new Match(newMatchId, homeTeam, awayTeam));
 
         return newMatchId;
     }
@@ -35,7 +32,7 @@ public class ScoreBoard {
     private boolean anyTeamIsAlreadyInAnOngoingMatch(String homeTeam, String awayTeam) {
         // This check feels pretty heavy and there are probably better ways to implement it.
         // Although new matches doesn't start too often, so it might be ok depending on total # of matches in the scoreboard.
-        return matches.values().stream()
+        return matches.stream()
                 .flatMap(match -> Stream.of(
                         match.getHomeTeam().getName(),
                         match.getAwayTeam().getName())
@@ -44,7 +41,10 @@ public class ScoreBoard {
     }
 
     Match getMatch(int matchId) {
-        return matches.get(matchId);
+        return matches.stream()
+                .filter(match -> match.getId() == matchId)
+                .findFirst()
+                .orElse(null);
     }
 
     public void updateMatch(int matchId, int newHomeTeamScore, int newAwayTeamScore) {
@@ -53,7 +53,7 @@ public class ScoreBoard {
     }
 
     public void finishMatch(int matchId) {
-        if (!matches.containsKey(matchId)) {
+        if (matches.stream().noneMatch(match -> match.getId() == matchId)) {
             throw new IllegalArgumentException(MATCH_DOES_NOT_EXIST);
         }
 
@@ -61,11 +61,9 @@ public class ScoreBoard {
     }
 
     public List<Match> getSummary() {
-        return matches.entrySet().stream()
-                .sorted(Comparator.comparingInt((Map.Entry<Integer, Match> entry) -> entry.getValue().getTotalScore())
-                        .reversed()
-                        .thenComparing(Map.Entry::getKey))
-                .map(Map.Entry::getValue)
+        return matches.stream()
+                .sorted(Comparator.comparingInt(Match::getTotalScore).reversed()
+                        .thenComparing(Match::getId))
                 .toList();
     }
 }
