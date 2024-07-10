@@ -82,6 +82,14 @@ I.e. it's not entirely clear in what format the summary should be delivered, onl
 This allows for the library to both be copied into an existing Java project (with possible modifications depending on Java-language compatibility) and used directly,
 or be used in a REST API where there is typically a Java to JSON serialization in place.
 
+#### Placeholder exceptions
+
+This implementation relies on simply using IllegalArgumentException with a custom message for everything.
+A nice update would be to add custom exceptions such as ScoreBoardException, MatchException and TeamException,
+based on the same or simply RuntimeException.
+Then the tests could focus more on types rather than the specific messages.
+An alternative could be to create enum error codes and document those.
+
 ### Approach
 
 The approach for implementation was to read through all instructions before getting started.
