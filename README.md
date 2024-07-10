@@ -74,7 +74,7 @@ but having the id field does enable intuitive business logic implementation and 
 The requirements state that a finished match should be removed from the summary, but that could be controlled with a boolean flag as well.
 That would also enable keeping track of historical matches, which would probably be a nice feature to add.
 
-#### Summary returned as List of Match objects
+#### Summary returned as List of MatchSummary objects
 
 Since the requirements state that the solution is supposed to be a simple library but the summary is a bit ambiguously presented in the task,
 I decided that the most likely expectations is to simply return a List of Java objects.
