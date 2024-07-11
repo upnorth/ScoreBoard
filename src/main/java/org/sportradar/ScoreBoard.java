@@ -53,14 +53,10 @@ public class ScoreBoard {
     }
 
     public void finishMatch(int matchId) {
-        if (matches.stream().noneMatch(match -> match.getId() == matchId)) {
-            throw new IllegalArgumentException(MATCH_DOES_NOT_EXIST);
-        }
-
         Match matchToRemove = matches.stream()
                 .filter(match -> match.getId() == matchId)
                 .findFirst()
-                .orElseThrow();
+                .orElseThrow(() -> new IllegalArgumentException(MATCH_DOES_NOT_EXIST));
 
         matches.remove(matchToRemove);
     }
