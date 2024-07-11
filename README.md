@@ -149,6 +149,16 @@ Both from suggestions by ChatGPT that seemed relevant for this use-case.
 
 My implementation is focused on a simple implementation to "my standards", as also instructed.
 
+#### Regarding testing
+
+I'm aware that there is some duplicate test-coverage after I introduced MatchTest.java and TeamTest.java with most
+things still being tested in ScoreBoardTest.java as well.
+This can probably be optimized a bit, like mostly having the edge-case testing closer to the implementations in
+question.
+But I don't see a clear way to divide things up in different scopes atm so I figured a note about it might suffice.
+Technically, the ScoreBoardTest does component testing rather than unit testing, but the same things can still be done
+from the ScoreBoard and has to be tested somehow.
+
 ### Approach
 
 #### Day 1 (~6h)
