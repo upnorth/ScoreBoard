@@ -1,6 +1,6 @@
 package org.sportradar;
 
-public class Team {
+class Team {
 
     static final String UPDATED_SCORE_LOWER = "A new score can not be lower than the previous";
     static final String MAX_ONE_GOAL_INCREASE = "A new score can not increase with more than 1 goal";
@@ -18,15 +18,15 @@ public class Team {
         this.score = 0;
     }
 
-    public String getName() {
+    String getName() {
         return name;
     }
 
-    public int getScore() {
+    int getScore() {
         return score;
     }
 
-    public void updateScore(int newScore) {
+    void updateScore(int newScore) {
         if (newScore < score) {
             throw new IllegalArgumentException(UPDATED_SCORE_LOWER);
         }

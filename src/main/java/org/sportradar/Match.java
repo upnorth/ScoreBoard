@@ -1,6 +1,6 @@
 package org.sportradar;
 
-public class Match {
+class Match {
 
     static final String NO_CHANGES_IN_SCORE_UPDATE = "Updated scores are identical to current scores";
     static final String SCORE_UPDATE_FOR_BOTH_TEAMS = "Both teams can't score at the same time";
@@ -23,7 +23,7 @@ public class Match {
         return awayTeam;
     }
 
-    public void updateScores(int newHomeTeamScore, int newAwayTeamScore) {
+    void updateScores(int newHomeTeamScore, int newAwayTeamScore) {
         if (newHomeTeamScore == homeTeam.getScore() && newAwayTeamScore == awayTeam.getScore()) {
             throw new IllegalArgumentException(NO_CHANGES_IN_SCORE_UPDATE);
         }
@@ -36,11 +36,11 @@ public class Match {
         awayTeam.updateScore(newAwayTeamScore);
     }
 
-    public int getTotalScore() {
+    int getTotalScore() {
         return homeTeam.getScore() + awayTeam.getScore();
     }
 
-    public int getId() {
+    int getId() {
         return id;
     }
 }
