@@ -102,6 +102,13 @@ This does allow for the library to be used for almost anything, where team names
 But for more official use-cases they could also be pre-set enums of known teams around the world,
 which lowers the risk of misspelling free-text strings and similar issues.
 
+#### Scores can't be lowered in a match
+
+This one is a little tricky. Goals can sometimes be deemed invalid due to offside and similar. That might require
+corrections in scoreboards. But this is not a regular event in a match. That is each team being able to score one goal
+each at a time. Being able to correct scores is not described in the task either, so I have opted to block this in the
+code.
+
 #### Summary returned as List of MatchSummary objects
 
 Since the requirements state that the solution is supposed to be a simple library but the summary is a bit ambiguously

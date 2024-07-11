@@ -20,7 +20,7 @@ class ScoreBoardTest {
     public static final String TEAM_6_NAME = "Team 6";
 
     @Test
-    void team_must_have_valid_non_null_name() {
+    void teams_must_have_valid_non_null_names() {
         var scoreBoard = new ScoreBoard();
 
         // Felt redundant to have 4 distinct test cases for each combination
@@ -42,7 +42,7 @@ class ScoreBoardTest {
     }
 
     @Test
-    void new_match_has_correct_initial_scores() {
+    void a_new_match_get_correct_initial_scores() {
         var scoreBoard = new ScoreBoard();
 
         var matchId = scoreBoard.newMatch(TEAM_1_NAME, TEAM_2_NAME);
@@ -56,7 +56,7 @@ class ScoreBoardTest {
     }
 
     @Test
-    void match_can_be_updated_with_valid_scores() {
+    void a_match_can_be_updated_with_valid_scores() {
         var scoreBoard = new ScoreBoard();
 
         var matchId = scoreBoard.newMatch(TEAM_1_NAME, TEAM_2_NAME);
@@ -71,7 +71,7 @@ class ScoreBoardTest {
     }
 
     @Test
-    void match_can_not_be_updated_with_new_scores_for_both_teams_at_the_same_time() {
+    void a_match_can_not_be_updated_with_new_scores_for_both_teams_at_the_same_time() {
         var scoreBoard = new ScoreBoard();
         var matchId = scoreBoard.newMatch(TEAM_1_NAME, TEAM_2_NAME);
 
@@ -84,7 +84,7 @@ class ScoreBoardTest {
     }
 
     @Test
-    void match_can_not_be_updated_with_the_current_scores() {
+    void a_match_can_not_be_updated_with_the_current_scores() {
         var scoreBoard = new ScoreBoard();
         var matchId = scoreBoard.newMatch(TEAM_1_NAME, TEAM_2_NAME);
         var match = scoreBoard.getMatch(matchId);
@@ -98,7 +98,7 @@ class ScoreBoardTest {
     }
 
     @Test
-    void team_can_not_get_lower_score_than_before() {
+    void a_team_can_not_get_lower_score_than_before() {
         var scoreBoard = new ScoreBoard();
         var matchId = scoreBoard.newMatch(TEAM_1_NAME, TEAM_2_NAME);
         var match = scoreBoard.getMatch(matchId);
@@ -112,7 +112,7 @@ class ScoreBoardTest {
     }
 
     @Test
-    void team_can_not_score_more_than_one_goal_at_a_time() {
+    void a_team_can_not_score_more_than_one_goal_at_a_time() {
         var scoreBoard = new ScoreBoard();
         var matchId = scoreBoard.newMatch(TEAM_1_NAME, TEAM_2_NAME);
         var match = scoreBoard.getMatch(matchId);
@@ -126,7 +126,7 @@ class ScoreBoardTest {
     }
 
     @Test
-    void team_can_not_be_in_multiple_concurrent_matches() {
+    void a_team_can_not_be_in_multiple_concurrent_matches() {
         var scoreBoard = new ScoreBoard();
         scoreBoard.newMatch(TEAM_1_NAME, TEAM_2_NAME);
 
@@ -150,7 +150,7 @@ class ScoreBoardTest {
     }
 
     @Test
-    void finishing_existing_match_should_remove_it_from_scoreboard() {
+    void finishing_an_existing_match_should_remove_it_from_scoreboard() {
         var scoreBoard = new ScoreBoard();
         var matchId = scoreBoard.newMatch(TEAM_1_NAME, TEAM_2_NAME);
 
@@ -162,7 +162,7 @@ class ScoreBoardTest {
     }
 
     @Test
-    void match_that_does_not_exist_in_scoreboard_can_not_be_removed() {
+    void a_match_that_does_not_exist_in_scoreboard_can_not_be_removed() {
         var scoreBoard = new ScoreBoard();
         var matchId = scoreBoard.newMatch(TEAM_1_NAME, TEAM_2_NAME);
         scoreBoard.finishMatch(matchId);
@@ -173,7 +173,7 @@ class ScoreBoardTest {
     }
 
     @Test
-    void finished_match_can_not_get_updated_scores() {
+    void a_finished_match_can_not_get_updated_scores() {
         var scoreBoard = new ScoreBoard();
         var matchId = scoreBoard.newMatch(TEAM_1_NAME, TEAM_2_NAME);
         scoreBoard.finishMatch(matchId);
@@ -184,7 +184,7 @@ class ScoreBoardTest {
     }
 
     @Test
-    void current_matches_summary_should_have_correct_scores_and_order() {
+    void summary_of_current_matches_should_have_correct_sorting_team_names_and_scores() {
         // Create scoreboard and add matches
         var scoreBoard = new ScoreBoard();
         var match1Id = scoreBoard.newMatch(TEAM_1_NAME, TEAM_2_NAME);

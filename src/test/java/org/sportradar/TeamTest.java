@@ -9,27 +9,27 @@ import static org.sportradar.Team.*;
 class TeamTest {
 
     @Test
-    void team_with_valid_name_can_be_created() {
+    void a_team_with_a_valid_name_can_be_created() {
         assertThat(new Team("Valid name").getName())
                 .isEqualTo("Valid name");
     }
 
     @Test
-    void team_name_can_not_be_null() {
+    void a_team_name_can_not_be_null() {
         assertThatThrownBy(() -> new Team(null)
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(INVALID_TEAM_NAME);
     }
 
     @Test
-    void team_name_can_not_be_empty_string() {
+    void a_team_name_can_not_be_empty_string() {
         assertThatThrownBy(() -> new Team("")
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(INVALID_TEAM_NAME);
     }
 
     @Test
-    void team_can_get_a_new_goal() {
+    void a_team_can_get_its_score_increased_by_one() {
         var team = new Team("Team 1");
 
         team.updateScore(team.getScore() + 1);
@@ -38,7 +38,7 @@ class TeamTest {
     }
 
     @Test
-    void team_can_not_get_lower_score_than_before() {
+    void a_team_can_not_get_lower_score_than_before() {
         var team = new Team("Team 1");
 
         assertThatThrownBy(() -> team.updateScore(team.getScore() - 1)
@@ -47,7 +47,7 @@ class TeamTest {
     }
 
     @Test
-    void team_can_not_score_more_than_one_goal_at_a_time() {
+    void a_team_can_not_score_more_than_one_goal_at_a_time() {
         var team = new Team("Team 1");
 
         assertThatThrownBy(() -> team.updateScore(team.getScore() + 2)
