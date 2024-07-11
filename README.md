@@ -114,11 +114,13 @@ or be used in a REST API where there is typically a Java to JSON serialization i
 
 #### Placeholder exceptions
 
-This implementation relies on simply using IllegalArgumentException with a custom message for everything.
+The task doesn't specify any specific error handling, so I opted to just throwing exceptions with messages.
+
+This implementation relies on using IllegalArgumentException with a custom message.
 A nice update would be to add custom exceptions such as ScoreBoardException, MatchException and TeamException,
-based on the same or simply RuntimeException.
+based on the same or RuntimeException.
 Then the tests could focus more on types rather than the specific messages.
-An alternative could be to create enum error codes and document those.
+An alternative could be to create enum error codes and document those, depending on the usec-case.
 
 #### README.md with Markdown formatting
 
