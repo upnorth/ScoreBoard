@@ -149,6 +149,9 @@ Both from suggestions by ChatGPT that seemed relevant for this use-case.
 
 My implementation is focused on a simple implementation to "my standards", as also instructed.
 
+Aside from thread safety, heavier operations such as parsing all current matches could probably be optimized with some
+parallelization.
+
 #### Regarding testing
 
 I'm aware that there is some duplicate test-coverage after I introduced MatchTest.java and TeamTest.java with most
