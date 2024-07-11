@@ -68,7 +68,7 @@ getSummary() simply returns a list of Match objects sorted with bigger total sco
 totals, earlier added first.
 The data in this list can then be iterated over and used by the library user.
 
-## Developer notes
+## Notes
 
 ### Assumptions
 
@@ -169,7 +169,7 @@ But I don't see a clear way to divide things up in different scopes atm so I fig
 Technically, the ScoreBoardTest does component testing rather than unit testing, but the same things can still be done
 from the ScoreBoard and has to be tested somehow.
 
-### Approach
+### Developer diary
 
 #### Day 1 (~6h)
 
@@ -196,3 +196,11 @@ Later re-read the task description a second time after all the main features wer
 I noticed the expectation of documented assumptions and added those to the README.
 I also realized that the summary data structure wasn't really designed for consumption and added the MatchSummary record
 to provide a more concise, flat and more relevant model.
+
+#### Day 3 (~2h)
+
+Final review and uploading to Github.
+Re-read the task description a second time.
+Realized that the "full" use-case test should include finishing a match.
+Discovered and fixed a bug with updating matches as part of that.
+Did some cleanup, optimizations and added more notes.
