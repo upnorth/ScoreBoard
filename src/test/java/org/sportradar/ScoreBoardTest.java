@@ -156,15 +156,29 @@ class ScoreBoardTest {
 
         scoreBoard.finishMatch(matchId);
 
-        assertThat(scoreBoard.getMatch(matchId)).isNull();
+        assertThatThrownBy(() -> scoreBoard.getMatch(matchId)
+        ).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(MATCH_DOES_NOT_EXIST);
     }
 
     @Test
     void match_that_does_not_exist_in_scoreboard_can_not_be_removed() {
         var scoreBoard = new ScoreBoard();
         var matchId = scoreBoard.newMatch(TEAM_1_NAME, TEAM_2_NAME);
+        scoreBoard.finishMatch(matchId);
 
-        assertThatThrownBy(() -> scoreBoard.finishMatch(matchId + 1)
+        assertThatThrownBy(() -> scoreBoard.updateMatch(matchId, 0, 1)
+        ).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(MATCH_DOES_NOT_EXIST);
+    }
+
+    @Test
+    void finished_match_can_not_get_updated_scores() {
+        var scoreBoard = new ScoreBoard();
+        var matchId = scoreBoard.newMatch(TEAM_1_NAME, TEAM_2_NAME);
+        scoreBoard.finishMatch(matchId);
+
+        assertThatThrownBy(() -> scoreBoard.finishMatch(matchId )
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(MATCH_DOES_NOT_EXIST);
     }
@@ -175,36 +189,40 @@ class ScoreBoardTest {
         var scoreBoard = new ScoreBoard();
         var match1Id = scoreBoard.newMatch(TEAM_1_NAME, TEAM_2_NAME);
         var match2Id = scoreBoard.newMatch(TEAM_3_NAME, TEAM_4_NAME);
+        scoreBoard.finishMatch(match1Id); // First match finished, enables rematch in #4
         var match3Id = scoreBoard.newMatch(TEAM_5_NAME, TEAM_6_NAME);
+        var match4Id = scoreBoard.newMatch(TEAM_2_NAME, TEAM_1_NAME);
 
         // Update match scores
-        scoreBoard.updateMatch(match1Id, 1, 0);
-
         scoreBoard.updateMatch(match2Id, 0, 1);
 
         scoreBoard.updateMatch(match3Id, 0, 1);
         scoreBoard.updateMatch(match3Id, 0, 2);
         scoreBoard.updateMatch(match3Id, 1, 2);
 
+        scoreBoard.updateMatch(match4Id, 1, 0);
+
         // Verify that summary is ordered by bigger total score first, and lower match id second
         var summary = scoreBoard.getSummary();
-        var first1total = scoreBoard.getMatch(match1Id);
-        var second1total = scoreBoard.getMatch(match2Id);
-        var third3total = scoreBoard.getMatch(match3Id);
+        var nr1ThirdStarted3total = scoreBoard.getMatch(match3Id);
+        var nr2secondStarted1total = scoreBoard.getMatch(match2Id);
+        var nr3fourthStarted1total = scoreBoard.getMatch(match4Id);
 
-        assertThat(summary.getFirst().homeTeamName()).isEqualTo(third3total.getHomeTeam().getName());
-        assertThat(summary.getFirst().homeTeamScore()).isEqualTo(third3total.getHomeTeam().getScore());
-        assertThat(summary.getFirst().awayTeamName()).isEqualTo(third3total.getAwayTeam().getName());
-        assertThat(summary.getFirst().awayTeamScore()).isEqualTo(third3total.getAwayTeam().getScore());
+        assertThat(summary.size()).isEqualTo(3);
 
-        assertThat(summary.get(1).homeTeamName()).isEqualTo(first1total.getHomeTeam().getName());
-        assertThat(summary.get(1).homeTeamScore()).isEqualTo(first1total.getHomeTeam().getScore());
-        assertThat(summary.get(1).awayTeamName()).isEqualTo(first1total.getAwayTeam().getName());
-        assertThat(summary.get(1).awayTeamScore()).isEqualTo(first1total.getAwayTeam().getScore());
+        assertThat(summary.getFirst().homeTeamName()).isEqualTo(nr1ThirdStarted3total.getHomeTeam().getName());
+        assertThat(summary.getFirst().homeTeamScore()).isEqualTo(nr1ThirdStarted3total.getHomeTeam().getScore());
+        assertThat(summary.getFirst().awayTeamName()).isEqualTo(nr1ThirdStarted3total.getAwayTeam().getName());
+        assertThat(summary.getFirst().awayTeamScore()).isEqualTo(nr1ThirdStarted3total.getAwayTeam().getScore());
 
-        assertThat(summary.get(2).homeTeamName()).isEqualTo(second1total.getHomeTeam().getName());
-        assertThat(summary.get(2).homeTeamScore()).isEqualTo(second1total.getHomeTeam().getScore());
-        assertThat(summary.get(2).awayTeamName()).isEqualTo(second1total.getAwayTeam().getName());
-        assertThat(summary.get(2).awayTeamScore()).isEqualTo(second1total.getAwayTeam().getScore());
+        assertThat(summary.get(1).homeTeamName()).isEqualTo(nr2secondStarted1total.getHomeTeam().getName());
+        assertThat(summary.get(1).homeTeamScore()).isEqualTo(nr2secondStarted1total.getHomeTeam().getScore());
+        assertThat(summary.get(1).awayTeamName()).isEqualTo(nr2secondStarted1total.getAwayTeam().getName());
+        assertThat(summary.get(1).awayTeamScore()).isEqualTo(nr2secondStarted1total.getAwayTeam().getScore());
+
+        assertThat(summary.get(2).homeTeamName()).isEqualTo(nr3fourthStarted1total.getHomeTeam().getName());
+        assertThat(summary.get(2).homeTeamScore()).isEqualTo(nr3fourthStarted1total.getHomeTeam().getScore());
+        assertThat(summary.get(2).awayTeamName()).isEqualTo(nr3fourthStarted1total.getAwayTeam().getName());
+        assertThat(summary.get(2).awayTeamScore()).isEqualTo(nr3fourthStarted1total.getAwayTeam().getScore());
     }
 }

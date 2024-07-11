@@ -44,11 +44,11 @@ public class ScoreBoard {
         return matches.stream()
                 .filter(match -> match.getId() == matchId)
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(() -> new IllegalArgumentException(MATCH_DOES_NOT_EXIST));
     }
 
     public void updateMatch(int matchId, int newHomeTeamScore, int newAwayTeamScore) {
-        Match match = matches.get(matchId);
+        Match match = getMatch(matchId);
         match.updateScores(newHomeTeamScore, newAwayTeamScore);
     }
 
