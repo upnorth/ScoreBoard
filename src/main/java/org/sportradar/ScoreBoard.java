@@ -5,11 +5,11 @@ import java.util.stream.Stream;
 
 public class ScoreBoard {
 
+    public static final String TEAM_IS_NOT_IN_AN_ACTIVE_MATCH = "Team is not in an active match";
     static final String ONE_MATCH_PER_TEAM = "One of the teams is already in a match";
     static final String MATCH_DOES_NOT_EXIST = "Match does not exist";
-
-    private int nextMatchId;
     private final List<Match> matches;
+    private int nextMatchId;
 
     public ScoreBoard() {
         nextMatchId = 0;
@@ -64,12 +64,23 @@ public class ScoreBoard {
     public List<MatchSummary> getSummary() {
         return matches.stream()
                 .sorted(Comparator.comparingInt(Match::getTotalScore).reversed()
-                        .thenComparing(Match::getId))
+                        .thenComparing(Comparator.comparingInt(Match::getId).reversed()))
                 .map(match -> new MatchSummary(
                         match.getHomeTeam().getName(),
                         match.getHomeTeam().getScore(),
                         match.getAwayTeam().getName(),
                         match.getAwayTeam().getScore()))
                 .toList();
+    }
+
+    public int getCurrentGoalsForTeam(String teamName) {
+        return matches.stream()
+                .filter(match -> match.getHomeTeam().getName().equals(teamName)
+                        || match.getAwayTeam().getName().equals(teamName))
+                .map(match -> match.getHomeTeam().getName().equals(teamName)
+                        ? match.getHomeTeam().getScore()
+                        : match.getAwayTeam().getScore())
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(TEAM_IS_NOT_IN_AN_ACTIVE_MATCH));
     }
 }

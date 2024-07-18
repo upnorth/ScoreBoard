@@ -215,15 +215,15 @@ class ScoreBoardTest {
         assertThat(summary.getFirst().awayTeamName()).isEqualTo(nr1ThirdStarted3total.getAwayTeam().getName());
         assertThat(summary.getFirst().awayTeamScore()).isEqualTo(nr1ThirdStarted3total.getAwayTeam().getScore());
 
-        assertThat(summary.get(1).homeTeamName()).isEqualTo(nr2secondStarted1total.getHomeTeam().getName());
-        assertThat(summary.get(1).homeTeamScore()).isEqualTo(nr2secondStarted1total.getHomeTeam().getScore());
-        assertThat(summary.get(1).awayTeamName()).isEqualTo(nr2secondStarted1total.getAwayTeam().getName());
-        assertThat(summary.get(1).awayTeamScore()).isEqualTo(nr2secondStarted1total.getAwayTeam().getScore());
+        assertThat(summary.get(1).homeTeamName()).isEqualTo(nr3fourthStarted1total.getHomeTeam().getName());
+        assertThat(summary.get(1).homeTeamScore()).isEqualTo(nr3fourthStarted1total.getHomeTeam().getScore());
+        assertThat(summary.get(1).awayTeamName()).isEqualTo(nr3fourthStarted1total.getAwayTeam().getName());
+        assertThat(summary.get(1).awayTeamScore()).isEqualTo(nr3fourthStarted1total.getAwayTeam().getScore());
 
-        assertThat(summary.get(2).homeTeamName()).isEqualTo(nr3fourthStarted1total.getHomeTeam().getName());
-        assertThat(summary.get(2).homeTeamScore()).isEqualTo(nr3fourthStarted1total.getHomeTeam().getScore());
-        assertThat(summary.get(2).awayTeamName()).isEqualTo(nr3fourthStarted1total.getAwayTeam().getName());
-        assertThat(summary.get(2).awayTeamScore()).isEqualTo(nr3fourthStarted1total.getAwayTeam().getScore());
+        assertThat(summary.get(2).homeTeamName()).isEqualTo(nr2secondStarted1total.getHomeTeam().getName());
+        assertThat(summary.get(2).homeTeamScore()).isEqualTo(nr2secondStarted1total.getHomeTeam().getScore());
+        assertThat(summary.get(2).awayTeamName()).isEqualTo(nr2secondStarted1total.getAwayTeam().getName());
+        assertThat(summary.get(2).awayTeamScore()).isEqualTo(nr2secondStarted1total.getAwayTeam().getScore());
     }
 
     @Test
@@ -236,18 +236,11 @@ class ScoreBoardTest {
          * e. Argentina 3 - Australia 1
          * -----------------------------
          * The summary should be as follows:
-         * 1. Uruguay 6 - Italy 6 // Same total as Spain - Brazil but started after that?
+         * 1. Uruguay 6 - Italy 6
          * 2. Spain 10 - Brazil 2
          * 3. Mexico 0 - Canada 5
-         * 4. Argentina 3 - Australia 1 // Same total as Germany - France but started after that?
+         * 4. Argentina 3 - Australia 1
          * 5. Germany 2 - France 2
-         * ------------------------------
-         * Test summary (as asserted below):
-         * 1. Spain 10 - Brazil 2
-         * 2. Uruguay 6 - Italy 6
-         * 3. Mexico 0 - Canada 5
-         * 4. Germany 2 - France 2
-         * 5. Argentina 3 - Australia 1
         */
         var scoreBoard = new ScoreBoard();
         String mexico = "Mexico";
@@ -285,30 +278,49 @@ class ScoreBoardTest {
         var summary = scoreBoard.getSummary();
         assertThat(summary.size()).isEqualTo(5);
 
-        assertThat(summary.get(0).homeTeamName()).isEqualTo(spain);
-        assertThat(summary.get(0).homeTeamScore()).isEqualTo(spainEndScore);
-        assertThat(summary.get(0).awayTeamName()).isEqualTo(brazil);
-        assertThat(summary.get(0).awayTeamScore()).isEqualTo(brazilEndScore);
+        assertThat(summary.get(0).homeTeamName()).isEqualTo(uruguay);
+        assertThat(summary.get(0).homeTeamScore()).isEqualTo(uruguayEndScore);
+        assertThat(summary.get(0).awayTeamName()).isEqualTo(italy);
+        assertThat(summary.get(0).awayTeamScore()).isEqualTo(italyEndScore);
 
-        assertThat(summary.get(1).homeTeamName()).isEqualTo(uruguay);
-        assertThat(summary.get(1).homeTeamScore()).isEqualTo(uruguayEndScore);
-        assertThat(summary.get(1).awayTeamName()).isEqualTo(italy);
-        assertThat(summary.get(1).awayTeamScore()).isEqualTo(italyEndScore);
+        assertThat(summary.get(1).homeTeamName()).isEqualTo(spain);
+        assertThat(summary.get(1).homeTeamScore()).isEqualTo(spainEndScore);
+        assertThat(summary.get(1).awayTeamName()).isEqualTo(brazil);
+        assertThat(summary.get(1).awayTeamScore()).isEqualTo(brazilEndScore);
 
         assertThat(summary.get(2).homeTeamName()).isEqualTo(mexico);
         assertThat(summary.get(2).homeTeamScore()).isEqualTo(mexicoEndScore);
         assertThat(summary.get(2).awayTeamName()).isEqualTo(canada);
         assertThat(summary.get(2).awayTeamScore()).isEqualTo(canadaEndScore);
 
-        assertThat(summary.get(3).homeTeamName()).isEqualTo(germany);
-        assertThat(summary.get(3).homeTeamScore()).isEqualTo(germanyEndScore);
-        assertThat(summary.get(3).awayTeamName()).isEqualTo(france);
-        assertThat(summary.get(3).awayTeamScore()).isEqualTo(franceEndScore);
+        assertThat(summary.get(3).homeTeamName()).isEqualTo(argentina);
+        assertThat(summary.get(3).homeTeamScore()).isEqualTo(argentinaEndScore);
+        assertThat(summary.get(3).awayTeamName()).isEqualTo(australia);
+        assertThat(summary.get(3).awayTeamScore()).isEqualTo(australiaEndScore);
 
-        assertThat(summary.get(4).homeTeamName()).isEqualTo(argentina);
-        assertThat(summary.get(4).homeTeamScore()).isEqualTo(argentinaEndScore);
-        assertThat(summary.get(4).awayTeamName()).isEqualTo(australia);
-        assertThat(summary.get(4).awayTeamScore()).isEqualTo(australiaEndScore);
+        assertThat(summary.get(4).homeTeamName()).isEqualTo(germany);
+        assertThat(summary.get(4).homeTeamScore()).isEqualTo(germanyEndScore);
+        assertThat(summary.get(4).awayTeamName()).isEqualTo(france);
+        assertThat(summary.get(4).awayTeamScore()).isEqualTo(franceEndScore);
+    }
+
+    @Test
+    void get_the_number_of_goals_for_a_given_team_name() {
+        // Prepare
+        var scoreBoard = new ScoreBoard();
+
+        int brGeMatchId = scoreBoard.newMatch("Brazil", "Germany");
+        simulateEndResult(scoreBoard, brGeMatchId, 1, 7);
+        String slovakia = "Slovakia";
+        int poSlMatchId = scoreBoard.newMatch("Poland", slovakia);
+        int slovakiaEndScore = 10;
+        simulateEndResult(scoreBoard, poSlMatchId, 9, slovakiaEndScore);
+
+        // Run
+        int slovakiaTeamScore = scoreBoard.getCurrentGoalsForTeam(slovakia);
+
+        // Verify
+        assertThat(slovakiaTeamScore).isEqualTo(slovakiaEndScore);
     }
 
     private void simulateEndResult(ScoreBoard scoreBoard, int matchId, int homeEndScore, int awayEndScore) {
@@ -320,4 +332,5 @@ class ScoreBoardTest {
             scoreBoard.updateMatch(matchId, homeEndScore, nextAwayScore);
         }
     }
+
 }
