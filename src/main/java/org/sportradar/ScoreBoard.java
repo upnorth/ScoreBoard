@@ -75,11 +75,9 @@ public class ScoreBoard {
 
     public int getCurrentGoalsForTeam(String teamName) {
         return matches.stream()
-                .filter(match -> match.getHomeTeam().getName().equals(teamName)
-                        || match.getAwayTeam().getName().equals(teamName))
-                .map(match -> match.getHomeTeam().getName().equals(teamName)
-                        ? match.getHomeTeam().getScore()
-                        : match.getAwayTeam().getScore())
+                .flatMap(match -> Stream.of(match.getHomeTeam(), match.getAwayTeam()))
+                .filter(team -> team.getName().equals(teamName))
+                .map(Team::getScore)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(TEAM_IS_NOT_IN_AN_ACTIVE_MATCH));
     }
